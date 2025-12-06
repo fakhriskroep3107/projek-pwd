@@ -4,11 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin - Perpustakaan</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- CSS Utama (Pengganti Tailwind) -->
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-    body { font-family: 'Inter', sans-serif; background-color: #f7f7f7; }
-    .active { background: linear-gradient(118deg, #7367f0, rgba(115, 103, 240, 0.7)); color: white; box-shadow: 0 0 10px 1px rgb(115 103 240 / 70%); }
+    /* Custom styles tetap dipertahankan */
+    body { 
+      font-family: 'Inter', sans-serif; 
+      background-color: #f7f7f7; 
+    }
+    
+    .active { 
+      background: linear-gradient(118deg, #7367f0, rgba(115, 103, 240, 0.7)); 
+      color: white; 
+      box-shadow: 0 0 10px 1px rgb(115 103 240 / 70%); 
+    }
   </style>
 </head>
 <body>

@@ -94,11 +94,31 @@ require_once __DIR__ . '/layout/top.php';
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       <?php foreach ($books as $book): ?>
         <div class="border rounded-lg overflow-hidden hover:shadow-lg transition">
-          <div class="bg-gradient-to-br from-blue-500 to-purple-600 h-48 flex items-center justify-center">
-            <svg class="w-20 h-20 text-white opacity-50" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
-            </svg>
+          <!-- Cover Image -->
+          <div class="h-64 bg-gray-100 flex items-center justify-center overflow-hidden">
+            <?php 
+            // Path absolut dari root folder
+            $cover_file = $book['cover'] ?? 'default-cover.jpg';
+            $cover_full_path = __DIR__ . '/../cover/' . $cover_file;
+            $cover_url = '../cover/' . $cover_file;
+            
+            // Cek file exists dengan path absolut
+            if (!empty($cover_file) && $cover_file !== 'default-cover.jpg' && file_exists($cover_full_path)): 
+            ?>
+              <img src="<?= htmlspecialchars($cover_url) ?>" 
+                   alt="<?= htmlspecialchars($book['judul']) ?>" 
+                   class="w-full h-full object-cover"
+                   onerror="this.parentElement.innerHTML='<div class=\'w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center\'><svg class=\'w-20 h-20 text-white opacity-50\' fill=\'currentColor\' viewBox=\'0 0 20 20\'><path d=\'M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z\'/></svg></div>'">
+            <?php else: ?>
+              <!-- Default Cover (gradient with icon) -->
+              <div class="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                <svg class="w-20 h-20 text-white opacity-50" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+                </svg>
+              </div>
+            <?php endif; ?>
           </div>
+          
           <div class="p-4">
             <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded"><?= htmlspecialchars($book['kategori']) ?></span>
             <h3 class="font-bold text-lg mt-2 mb-1 line-clamp-2"><?= htmlspecialchars($book['judul']) ?></h3>

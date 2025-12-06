@@ -13,20 +13,17 @@ CREATE TABLE `admin` (
   `nama` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `foto` varchar(255) DEFAULT 'default-admin.jpg',
+  `foto` varchar(255) DEFAULT 'AVA-62693a77ed7051.20097657.jpg',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table `admin`
 INSERT INTO `admin` (`id`, `nama`, `email`, `password`, `foto`) VALUES
-(1, 'Admin Perpustakaan', 'admin@perpus.com', 'admin123', 'default-admin.jpg'),
-(2, 'Super Admin', 'superadmin@perpus.com', 'super123', 'default-admin.jpg');
+(1, 'Admin Perpustakaan', 'admin@perpus.com', 'admin123', 'AVA-62693a77ed7051.20097657.jpg'),
+(2, 'Super Admin', 'superadmin@perpus.com', 'super123', 'AVA-62693a77ed7051.20097657.jpg');
 
 -- Password untuk kedua admin: password
--- Anda bisa login dengan:
--- Email: admin@perpus.com, Password: password
--- Email: superadmin@perpus.com, Password: password
 
 -- --------------------------------------------------------
 
@@ -40,16 +37,18 @@ CREATE TABLE `anggota` (
   `alamat` text NOT NULL,
   `no_telepon` varchar(20) DEFAULT NULL,
   `status` enum('Tidak Meminjam','Sedang Meminjam') NOT NULL DEFAULT 'Tidak Meminjam',
-  `foto` varchar(255) DEFAULT 'default-anggota.jpg',
+  `foto` varchar(255) DEFAULT 'foto-default.jpg',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table `anggota`
 INSERT INTO `anggota` (`id`, `nama`, `email`, `password`, `gender`, `alamat`, `no_telepon`, `status`, `foto`) VALUES
-(1, 'Budi Santoso', 'budi@gmail.com', 'budi123', 'Pria', 'Jl. Merdeka No. 10, Jakarta', '08123456789', 'Tidak Meminjam', 'default-anggota.jpg'),
-(2, 'Siti Nurhaliza', 'siti@gmail.com', 'siti123', 'Wanita', 'Jl. Sudirman No. 25, Bandung', '08234567890', 'Tidak Meminjam', 'default-anggota.jpg'),
-(3, 'Ahmad Fauzi', 'ahmad@gmail.com', 'ahmad123', 'Pria', 'Jl. Gatot Subroto No. 5, Surabaya', '08345678901', 'Tidak Meminjam', 'default-anggota.jpg');
+(1, 'Budi Santoso', 'budi@gmail.com', 'budi123', 'Pria', 'Jl. Merdeka No. 10, Jakarta', '08123456789', 'Tidak Meminjam', 'foto-default.jpg'),
+(2, 'Siti Nurhaliza', 'siti@gmail.com', 'siti123', 'Wanita', 'Jl. Sudirman No. 25, Bandung', '08234567890', 'Tidak Meminjam', 'foto-default.jpg'),
+(3, 'Ahmad Fauzi', 'ahmad@gmail.com', 'ahmad123', 'Pria', 'Jl. Gatot Subroto No. 5, Surabaya', '08345678901', 'Tidak Meminjam', 'foto-default.jpg');
+
+-- Password untuk semua anggota: password
 
 -- --------------------------------------------------------
 
@@ -64,16 +63,17 @@ CREATE TABLE `books` (
   `isbn` varchar(50) DEFAULT NULL,
   `jumlah_stok` int(11) NOT NULL DEFAULT 1,
   `status` enum('Tersedia','Dipinjam','Tidak Tersedia') NOT NULL DEFAULT 'Tersedia',
+  `cover` varchar(255) DEFAULT 'default-cover.jpg',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dumping data for table `books`
-INSERT INTO `books` (`id`, `judul`, `kategori`, `pengarang`, `penerbit`, `tahun_terbit`, `isbn`, `jumlah_stok`, `status`) VALUES
-(1, 'Harry Potter and the Philosopher Stone', 'Fiksi', 'J.K Rowling', 'Media Cipta', 2001, '978-0-7475-3269-9', 3, 'Tersedia'),
-(2, 'Laskar Pelangi', 'Novel', 'Andrea Hirata', 'Bentang Pustaka', 2005, '978-979-3062-79-2', 5, 'Tersedia'),
-(3, 'Bumi Manusia', 'Novel Sejarah', 'Pramoedya Ananta Toer', 'Lentera Dipantara', 1980, '978-979-8811-98-5', 2, 'Tersedia'),
-(4, 'Dilan 1990', 'Romansa', 'Pidi Baiq', 'Media Baca', 2014, '978-602-220-117-3', 4, 'Tersedia'),
-(5, 'Algoritma dan Pemrograman', 'Komputer', 'Rinaldi Munir', 'Informatika', 2011, '978-979-29-2352-0', 3, 'Tersedia');
+INSERT INTO `books` (`id`, `judul`, `kategori`, `pengarang`, `penerbit`, `tahun_terbit`, `isbn`, `jumlah_stok`, `status`, `cover`) VALUES
+(1, 'Harry Potter and the Philosopher Stone', 'Fiksi', 'J.K Rowling', 'Media Cipta', 2001, '978-0-7475-3269-9', 3, 'Tersedia', 'default-cover.jpg'),
+(2, 'Laskar Pelangi', 'Novel', 'Andrea Hirata', 'Bentang Pustaka', 2005, '978-979-3062-79-2', 5, 'Tersedia', 'default-cover.jpg'),
+(3, 'Bumi Manusia', 'Novel Sejarah', 'Pramoedya Ananta Toer', 'Lentera Dipantara', 1980, '978-979-8811-98-5', 2, 'Tersedia', 'default-cover.jpg'),
+(4, 'Dilan 1990', 'Romansa', 'Pidi Baiq', 'Media Baca', 2014, '978-602-220-117-3', 4, 'Tersedia', 'default-cover.jpg'),
+(5, 'Algoritma dan Pemrograman', 'Komputer', 'Rinaldi Munir', 'Informatika', 2011, '978-979-29-2352-0', 3, 'Tersedia', 'default-cover.jpg');
 
 -- --------------------------------------------------------
 
@@ -93,11 +93,6 @@ CREATE TABLE `peminjaman` (
   CONSTRAINT `peminjaman_ibfk_1` FOREIGN KEY (`anggota_id`) REFERENCES `anggota` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `peminjaman_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- Dumping data for table `peminjaman` (contoh data)
-INSERT INTO `peminjaman` (`id`, `anggota_id`, `book_id`, `tgl_pinjam`, `tgl_kembali`, `status`, `catatan_admin`) VALUES
-(1, 1, 2, '2024-12-01', '2024-12-08', 'approved', 'Disetujui'),
-(2, 2, 4, '2024-12-03', '2024-12-10', 'pending', NULL);
 
 -- --------------------------------------------------------
 

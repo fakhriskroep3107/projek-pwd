@@ -28,8 +28,9 @@ require_once __DIR__ . '/layout/top.php';
 </section>
 
 <div class="bg-white rounded-lg p-6 my-6 shadow-lg">
-  <form method="POST" action="../logic/admin/buku-edit.php" class="space-y-4">
+  <form method="POST" action="../logic/admin/buku-edit.php" enctype="multipart/form-data" class="space-y-4">
     <input type="hidden" name="id" value="<?= $book['id'] ?>">
+    <input type="hidden" name="old_cover" value="<?= $book['cover'] ?>">
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
@@ -76,6 +77,31 @@ require_once __DIR__ . '/layout/top.php';
           <option value="Tidak Tersedia" <?= $book['status'] == 'Tidak Tersedia' ? 'selected' : '' ?>>Tidak Tersedia</option>
         </select>
       </div>
+      
+      <!-- Upload Cover Buku -->
+      <div class="md:col-span-2">
+        <label class="block text-sm font-medium mb-2">Cover Buku</label>
+        
+        <!-- Current Cover -->
+        <?php if (!empty($book['cover']) && $book['cover'] !== 'default-cover.jpg'): ?>
+          <div class="mb-3">
+            <p class="text-sm text-gray-600 mb-2">Cover saat ini:</p>
+            <img src="../cover/<?= htmlspecialchars($book['cover']) ?>" alt="Current Cover" 
+              class="h-40 w-auto object-cover rounded border">
+          </div>
+        <?php endif; ?>
+        
+        <input type="file" name="cover" accept="image/jpg,image/jpeg,image/png"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          onchange="previewImage(event)">
+        <p class="text-xs text-gray-500 mt-1">Format: JPG, JPEG, PNG. Max 2MB. Kosongkan jika tidak ingin mengubah.</p>
+        
+        <!-- Preview New Image -->
+        <div id="imagePreview" class="mt-3 hidden">
+          <p class="text-sm text-gray-600 mb-2">Preview cover baru:</p>
+          <img id="preview" src="" alt="Preview" class="h-40 w-auto object-cover rounded border">
+        </div>
+      </div>
     </div>
 
     <?php if (isset($_GET['error'])): ?>
@@ -94,5 +120,24 @@ require_once __DIR__ . '/layout/top.php';
     </div>
   </form>
 </div>
+
+<script>
+function previewImage(event) {
+  const file = event.target.files[0];
+  const preview = document.getElementById('preview');
+  const previewContainer = document.getElementById('imagePreview');
+  
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      preview.src = e.target.result;
+      previewContainer.classList.remove('hidden');
+    }
+    reader.readAsDataURL(file);
+  } else {
+    previewContainer.classList.add('hidden');
+  }
+}
+</script>
 
 <?php require_once __DIR__ . '/layout/bottom.php'; ?>

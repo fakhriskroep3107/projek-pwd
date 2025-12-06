@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=auth/login.php">
+  <title>Perpustakaan Digital - Redirecting...</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+    .loader-container {
+      text-align: center;
+      background: white;
+      padding: 60px 80px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .loader {
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #667eea;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 30px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    h1 {
+      color: #2d3748;
+      margin: 0 0 15px 0;
+      font-size: 2rem;
+    }
+    p {
+      color: #718096;
+      margin: 0 0 20px 0;
+      font-size: 1.1rem;
+    }
+    .manual-link {
+      display: inline-block;
+      padding: 12px 30px;
+      background: #667eea;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      margin-top: 15px;
+      transition: all 0.3s;
+    }
+    .manual-link:hover {
+      background: #5a67d8;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="loader-container">
+    <div class="loader"></div>
+    <h1>Perpustakaan Digital</h1>
+    <p>Mengalihkan ke halaman login...</p>
+    <p style="font-size: 0.9rem; color: #a0aec0;">Jika tidak teralihkan otomatis:</p>
+    <a href="auth/login.php" class="manual-link">Klik di sini untuk Login</a>
+  </div>
+
+  <script>
+    // Fallback jika meta refresh tidak bekerja
+    setTimeout(function() {
+      window.location.href = 'auth/login.php';
+    }, 500);
+  </script>
+</body>
+</html>

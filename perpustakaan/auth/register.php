@@ -18,12 +18,14 @@ if (isset($_SESSION['user_id'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registrasi - Perpustakaan</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- CSS Utama - 100% Offline -->
+  <link rel="stylesheet" href="../assets/css/style.css">
+  
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
     * { font-family: 'Poppins', sans-serif; }
     .bg-img {
-      background-image: url('https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-image: url('../assets/img/library-bg.jpg');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
@@ -34,7 +36,7 @@ if (isset($_SESSION['user_id'])) {
 <body>
   <div class="flex min-h-screen overflow-y-auto">
     <!-- Left - Image -->
-    <div class="hidden md:block w-5/12 bg-img shrink-0">
+    <div class="hidden md:block md:w-5/12 bg-img shrink-0">
       <div class="bg-black/40 h-full flex justify-center items-center">
         <div class="text-white text-center">
           <h1 class="text-4xl font-bold mb-4">Perpustakaan Digital</h1>
